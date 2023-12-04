@@ -6,6 +6,7 @@ import java.util.*;
 /**
  * 给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。
  * 你可以按 任意顺序 返回答案。
+ *
  * @author lizelin
  * @date 2023/11/22
  */
@@ -18,6 +19,8 @@ public class Leetcode347 {
         for (int num : nums) {
             map.put(num, map.getOrDefault(num, 0) + 1);
         }
+
+//        System.out.println(map);
 
         // int[] 的第一个元素代表数组的值，第二个元素代表了该值出现的次数
         PriorityQueue<int[]> queue = new PriorityQueue<int[]>(new Comparator<int[]>() {
@@ -47,6 +50,14 @@ public class Leetcode347 {
         }
 
         return ret;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = new int[]{1, 1, 2, 2, 3, 3, 3, 4, 5};
+        int[] result = new Leetcode347().topKFrequent(nums, 3);
+        for (int num : result) {
+            System.out.print(num + "\t");
+        }
     }
 }
 
