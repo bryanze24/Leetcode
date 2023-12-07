@@ -51,8 +51,53 @@ public class Leetcode451 {
         return list;
     }
 
+
+    public String frequencySort1(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        int maxFreq = 0; //记录字符出现最高的频率
+        int length = s.length();
+
+        for (int i = 0; i < length; i++) {
+            char c = s.charAt(i);
+            int frequency = map.getOrDefault(c, 0) + 1;
+            map.put(c, frequency);
+            maxFreq = Math.max(maxFreq, frequency);
+        }
+
+        //创建桶
+        StringBuffer[] buckets = new StringBuffer[maxFreq + 1];
+        for (int i = 0; i <= maxFreq; i++) {
+            buckets[i] = new StringBuffer();
+        }
+
+        //目的是把字符串中出现相同频率的字符拼接在同一个桶内
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+            char c = entry.getKey();
+            int frequency = entry.getValue();
+            buckets[frequency].append(c);
+        }
+
+        StringBuffer sb = new StringBuffer();
+
+        for (int i = maxFreq; i > 0; i--) {
+            StringBuffer bucket = buckets[i]; //每个桶内的对象
+            int size = bucket.length(); //桶内对象的长度，即字符串中所有出现i次的字符
+
+            for (int j = 0; j < size; j++) { // 字符串中所有出现i次的字符
+
+                for (int k = 0; k < i; k++) { //字母在第i个桶说明该字母重复i次，拼接i次
+                    sb.append(bucket.charAt(j));
+                }
+
+            }
+
+        }
+
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         String str = "tree";
-        System.out.println(new Leetcode451().frequencySort(str));
+        System.out.println(new Leetcode451().frequencySort1(str));
     }
 }
