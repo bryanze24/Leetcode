@@ -10,7 +10,7 @@ package bryanze.leetcode;
  * @author lizelin
  * @date 2023/12/17
  */
-public class leetcode521 {
+public class Leetcode521 {
     public int findLUSLength(String a, String b) {
 
         if (a.length() != b.length()) {
@@ -32,6 +32,6 @@ public class leetcode521 {
 
     public static void main(String[] args) {
         String a = "aaaabcd", b = "aaaaacd";
-        System.out.println(new leetcode521().findLUSLength(a, b));
+        System.out.println(new Leetcode521().findLUSLength(a, b));
     }
 }

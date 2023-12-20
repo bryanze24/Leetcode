@@ -11,7 +11,7 @@ import java.util.List;
  * @author lizelin
  * @date 2023/12/15
  */
-public class leetcode524 {
+public class Leetcode524 {
     public String findLongestWord(String s, List<String> dictionary) {
         String result = "";
         for (String string : dictionary) {
@@ -116,6 +116,6 @@ public class leetcode524 {
     public static void main(String[] args) {
         List<String> dictionary = Arrays.asList("ale", "apple", "monkey", "plea");
         String s = "abpcplea";
-        System.out.println(new leetcode524().findLongestWord2(s, dictionary));
+        System.out.println(new Leetcode524().findLongestWord2(s, dictionary));
     }
 }

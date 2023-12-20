@@ -1,7 +1,5 @@
 package bryanze.leetcode;
 
-import java.util.Arrays;
-
 /**
  * 给定字符串列表 strs ，返回其中 最长的特殊序列 的长度。如果最长特殊序列不存在，返回 -1 。
  * 特殊序列 定义如下：该序列为某字符串 独有的子序列（即不能是其他字符串的子序列）。
@@ -12,7 +10,7 @@ import java.util.Arrays;
  * @author lizelin
  * @date 2023/12/18
  */
-public class leetcode522 {
+public class Leetcode522 {
     public int findLUSLength(String[] strs) {
 
 //        Arrays.sort(strs, String::compareTo);
@@ -67,7 +65,7 @@ public class leetcode522 {
 
     public static void main(String[] args) {
         String[] strs = {"aaa", "aaa", "aa"};
-        System.out.println(new leetcode522().findLUSLength(strs));
+        System.out.println(new Leetcode522().findLUSLength(strs));
     }
 
 }

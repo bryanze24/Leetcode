@@ -11,7 +11,7 @@ import java.util.HashMap;
  * @author lizelin
  * @date 2023/12/18
  */
-public class leetcode594 {
+public class Leetcode594 {
 
     //双指针 + 剪枝
     public int findLHS(int[] nums) {
@@ -74,7 +74,7 @@ public class leetcode594 {
 
     public static void main(String[] args) {
         int[] nums = {1, 3, 2, 2, 5, 2, 3, 7};
-        System.out.println(new leetcode594().findLHS1(nums));
+        System.out.println(new Leetcode594().findLHS1(nums));
 
     }
 }

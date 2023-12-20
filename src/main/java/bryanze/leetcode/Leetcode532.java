@@ -15,7 +15,7 @@ import java.util.HashMap;
  * @author lizelin
  * @date 2023/12/17
  */
-public class leetcode532 {
+public class Leetcode532 {
     public int findPairs(int[] nums, int k) {
 
         Arrays.sort(nums);
@@ -88,6 +88,6 @@ public class leetcode532 {
 
     public static void main(String[] args) {
         int[] nums = {1, 1, 1, 1, 2};
-        System.out.println(new leetcode532().findPairs(nums, 1));
+        System.out.println(new Leetcode532().findPairs(nums, 1));
     }
 }

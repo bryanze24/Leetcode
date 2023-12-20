@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
- * 假设 力扣（LeetCode）即将开始 IPO 。为了以更高的价格将股票卖给风险投资公司，
+ * 假设 力扣（Leetcode）即将开始 IPO 。为了以更高的价格将股票卖给风险投资公司，
  * 力扣 希望在 IPO 之前开展一些项目以增加其资本。 由于资源有限，
  * 它只能在 IPO 之前完成最多 k 个不同的项目。帮助 力扣 设计完成最多 k 个不同项目后得到最大总资本的方式。
  * 给你 n 个项目。对于每个项目 i ，它都有一个纯利润 profits[i] ，和启动该项目需要的最小资本 capital[i] 。
@@ -16,7 +16,7 @@ import java.util.PriorityQueue;
  * @author lizelin
  * @date 2023/12/17
  */
-public class leetcode502 {
+public class Leetcode502 {
     public int findMaximizedCapital(int k, int w, int[] profits, int[] capital) {
         int length = capital.length;
         int[][] array = new int[length][2];
@@ -116,6 +116,6 @@ public class leetcode502 {
     public static void main(String[] args) {
         int[] profits = new int[]{1, 2, 3};
         int[] capital = new int[]{0, 1, 1};
-        System.out.println(new leetcode502().findMaximizedCapital(2, 0, profits, capital));
+        System.out.println(new Leetcode502().findMaximizedCapital(2, 0, profits, capital));
     }
 }
