@@ -1,6 +1,7 @@
 package bryanze.leetcode;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -12,7 +13,11 @@ import java.util.List;
  */
 public class Leetcode46 {
 
-    public List<List<Integer>> permute(int[] nums) {
+    LinkedList<Integer> temp = new LinkedList<>();
+    List<List<Integer>> ans = new ArrayList<>();
+    boolean[] used;
+
+    public List<List<Integer>> permuteByDFS(int[] nums) {
         // 首先是特判
         int len = nums.length;
         // 使用一个动态数组保存所有可能的全排列
@@ -53,6 +58,40 @@ public class Leetcode46 {
                 // 2、无需回溯
             }
         }
+    }
+
+
+    public List<List<Integer>> permuteByBackTracking(int[] nums) {
+        if (nums.length == 0) {
+            return ans;
+        }
+
+        used = new boolean[nums.length];
+        backTracking(nums);
+        return ans;
+    }
+
+    private void backTracking(int[] nums) {
+
+        if (temp.size() == nums.length) {
+            ans.add(new ArrayList<>(temp));
+            return;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (!used[i]) {
+                temp.add(nums[i]);
+                used[i] = true;
+                backTracking(nums);
+                temp.removeLast();
+                used[i] = false;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] nums = new int[]{1, 2, 3};
+        System.out.println(new Leetcode46().permuteByBackTracking(nums));
     }
 
 }
