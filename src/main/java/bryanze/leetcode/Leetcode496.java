@@ -1,8 +1,6 @@
 package bryanze.leetcode;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * nums1 中数字 x 的 下一个更大元素 是指 x 在 nums2 中对应位置 右侧 的 第一个 比 x 大的元素。
@@ -17,18 +15,18 @@ import java.util.Stack;
 
 public class Leetcode496 {
     /**
-     这个问题可以这样抽象思考：把数组的元素想象成并列站立的人，元素大小想象成人的身高。
-     这些人面对你站成一列，如何求元素「2」的 Next Greater Number呢？
-     很简单，如果能够看到元素「2」，那么他后面可见的第一个人就是「2」的 Next Greater Number，
-     因为比「2」小的元素身高不够，都被「2」挡住了，第一个
-     露出来的就是答案。
-     --------
-     |      -------
-     --------------------|      |
-     |       -------|    |      |
-     |       |      |    |      |
-     2       1      2    4      3
-     4       2      4    -1     -1
+     * 这个问题可以这样抽象思考：把数组的元素想象成并列站立的人，元素大小想象成人的身高。
+     * 这些人面对你站成一列，如何求元素「2」的 Next Greater Number呢？
+     * 很简单，如果能够看到元素「2」，那么他后面可见的第一个人就是「2」的 Next Greater Number，
+     * 因为比「2」小的元素身高不够，都被「2」挡住了，第一个
+     * 露出来的就是答案。
+     * --------
+     * |      -------
+     * --------------------|      |
+     * |       -------|    |      |
+     * |       |      |    |      |
+     * 2       1      2    4      3
+     * 4       2      4    -1     -1
      */
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         int[] result = new int[nums1.length];
@@ -56,4 +54,46 @@ public class Leetcode496 {
         return map;
 
     }
+
+    public int[] nextGreaterElementByMonotonicStack(int[] nums1, int[] nums2) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>(); // key:nums1的元素值， value:对应的下标值
+        for (int i = 0; i < nums1.length; i++) {
+            hashMap.put(nums1[i], i);
+        }
+
+        int[] ans = new int[nums1.length];
+        Arrays.fill(ans, -1); // 因为不存在下一个更大元素，答案为-1，所以初始化为-1
+
+        LinkedList<Integer> stack = new LinkedList<>(); // 单调栈
+        for (int num : nums2) {
+            if (stack.isEmpty() || num <= stack.peek()) {
+                stack.push(num);
+
+            } else {
+
+                while (!stack.isEmpty() && num > stack.peek()) {
+                    Integer peeked = stack.peek();
+
+                    if (hashMap.containsKey(peeked)) { //为true证明栈顶元素在nums1中存在
+                        Integer index = hashMap.get(peeked); // 找到栈顶元素在nums1中的位置
+                        ans[index] = num;
+                    }
+
+                    stack.pop();
+                }
+
+                stack.push(num);
+            }
+
+        }
+
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int[] nums1 = {2, 4};
+        int[] nums2 = {1, 2, 3, 4};
+        System.out.println(Arrays.toString(new Leetcode496().nextGreaterElementByMonotonicStack(nums1, nums2)));
+    }
+
 }

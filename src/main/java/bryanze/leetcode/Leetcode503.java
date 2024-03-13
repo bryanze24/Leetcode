@@ -17,7 +17,7 @@ public class Leetcode503 {
         Arrays.fill(result, -1);
         Deque<Integer> stack = new ArrayDeque<>();
         for (int i = 0; i < 2 * nums.length - 1; i++) {
-            while (!stack.isEmpty() && nums[stack.peek()] <nums[i % nums.length]){
+            while (!stack.isEmpty() && nums[stack.peek()] < nums[i % nums.length]) {
                 result[stack.pop()] = nums[i % nums.length];
             }
             stack.push(i % nums.length);
@@ -26,7 +26,7 @@ public class Leetcode503 {
         return result;
     }
 
-    public int[] nextGreaterElements1(int[] nums){
+    public int[] nextGreaterElements1(int[] nums) {
         int[] result = new int[nums.length];
         Map<Integer, Integer> map = nextGreaterHelper(nums);
 
@@ -55,9 +55,36 @@ public class Leetcode503 {
         return map;
     }
 
+    public int[] nextGreaterElementByMonotonicStack(int[] nums) {
+        int length = nums.length;
+        LinkedList<Integer> stack = new LinkedList<>();
+        int[] ans = new int[length];
+        Arrays.fill(ans, -1);
+
+        for (int i = 0; i < 2 * length; i++) {
+
+            if (stack.isEmpty() || nums[i % length] <= nums[stack.peek()]) {
+                stack.push(i % length);
+
+            } else {
+
+                while (!stack.isEmpty() && nums[i % length] > nums[stack.peek()]) {
+                    Integer peeked = stack.peek();
+                    ans[peeked] = nums[i % length];
+                    stack.pop();
+                }
+
+                stack.push(i % length);
+            }
+
+        }
+
+        return ans;
+    }
+
     public static void main(String[] args) {
         int[] nums = {100, 1, 11, 1, 120, 111, 123, 1, -1, -100};
-        int[] ints = new Leetcode503().nextGreaterElements1(nums);
+        int[] ints = new Leetcode503().nextGreaterElementByMonotonicStack(nums);
         for (int num : ints) {
             System.out.print(num + "\t");
         }
