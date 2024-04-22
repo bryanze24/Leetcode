@@ -18,7 +18,7 @@ public class Leetcode24 {
         ListNode node = new ListNode(-1);
         node.next = head;
         ListNode temp = node;
-        while(temp.next != null && temp.next.next != null){
+        while (temp.next != null && temp.next.next != null) {
             ListNode start = temp.next;
             ListNode end = temp.next.next;
             temp.next = end;
@@ -28,6 +28,7 @@ public class Leetcode24 {
         }
         return node.next;
     }
+
     public ListNode swapPairs1(ListNode head) {
         //解法二：利用栈每次取出两个进行交换,时间复杂度O(n),空间复杂度O(1)
         if (head == null || head.next == null) {
@@ -55,8 +56,38 @@ public class Leetcode24 {
         return head.next;
     }
 
+    public ListNode swapPairs2(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode dummy = new ListNode(-1, null);
+        ListNode p = dummy;
+        ListNode p1 = head;
+        ListNode p2 = p1.next;
+        while (p2 != null) {
+            p.next = new ListNode(p2.val);
+            p = p.next;
+            p.next = new ListNode(p1.val);
+            p = p.next;
+            p1 = p2.next;
+            if (p1 != null) {
+                p2 = p1.next;
+            } else {
+                p2 = null;
+            }
+        }
+
+        if (p1 != null) {
+            p.next = new ListNode(p1.val);
+        }
+
+        return dummy.next;
+
+    }
+
     public static void main(String[] args) {
-        ListNode head = ListNode.of(1, 2, 3, 4);
-        System.out.println(new Leetcode24().swapPairs1(head));
+        ListNode head = ListNode.of(1, 2, 3, 4, 5);
+        System.out.println(new Leetcode24().swapPairs2(head));
     }
 }
