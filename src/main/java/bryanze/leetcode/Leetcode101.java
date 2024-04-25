@@ -33,10 +33,13 @@ public class Leetcode101 {
     }
 
     public static void main(String[] args) {
-        TreeNode root = new TreeNode(
-                new TreeNode(new TreeNode(4),2,new TreeNode(5)),
+        TreeNode root = new TreeNode(new TreeNode(
+                new TreeNode(3), 2, new TreeNode(4)
+        ),
                 1,
-                new TreeNode(new TreeNode(5),2,new TreeNode(4))
+                new TreeNode(
+                        new TreeNode(4), 2, new TreeNode(3)
+                )
         );
 
         System.out.println(new Leetcode101().isSymmetric(root));

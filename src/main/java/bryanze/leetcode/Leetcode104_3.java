@@ -12,6 +12,11 @@ public class Leetcode104_3 {
         1. 使用层序遍历，层数即最大深度
      */
     public int maxDepth(TreeNode root) {
+
+        if (root == null) {
+            return 0;
+        }
+
         Queue<TreeNode> queue = new LinkedList<>();
 
         queue.offer(root);
