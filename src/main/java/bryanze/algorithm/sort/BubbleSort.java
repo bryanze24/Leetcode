@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 /**
  * 冒泡排序
+ *
  * @author lizelin
  * @date 2023/11/26
  */
@@ -64,13 +65,13 @@ public class BubbleSort {
                     flag = true;
                 }
             }
-            n= x;
+            n = x;
         } while (flag);
     }
 
     public static void main(String[] args) {
         int[] array = {0, 3, 6, 3, 6, 7, 8, 2, 5, 7, 9, 2, 1, 0};
-        bubbleSort(array);
+        bubble(array);
         System.out.println(Arrays.toString(array));
     }
 }

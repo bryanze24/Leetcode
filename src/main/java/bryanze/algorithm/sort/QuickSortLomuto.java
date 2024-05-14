@@ -10,6 +10,7 @@ import java.util.Arrays;
  * 交换时机：j 找到小的，且与 i 不相等
  * i 找到 >= 基准点元素后，不应自增
  * 最后基准点与 i 交换，i 即为基准点最终索引
+ *
  * @author lizelin
  * @date 2023/11/28
  */
@@ -35,7 +36,7 @@ public class QuickSortLomuto {
         int j = left;
 
         while (j < right) {
-            if (array[j] < pv) {
+            if (array[j] <= pv) {
                 if (i != j) {
                     swap(array, i, j);
                 }
@@ -57,6 +58,7 @@ public class QuickSortLomuto {
 
     public static void main(String[] args) {
         int[] array = {0, 3, 10, 6, 3, 6, 7, 8, 2, 5, 7, 9, 2, 1, 0, 10};
+//        int[] array = {3, 6, 8, 10, 1, 2, 1};
         sort(array);
         System.out.println(Arrays.toString(array));
     }
