@@ -2,6 +2,8 @@ package bryanze.leetcode;
 
 import bryanze.datastructure.heap.MinHeap2;
 
+import java.util.PriorityQueue;
+
 /**
  * 给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。
  * 请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
@@ -16,11 +18,27 @@ public class Leetcode215 {
             heap.offer(nums[i]);
         }
         for (int i = k; i < nums.length; i++) {
-            if(nums[i] > heap.peek()){
+            if (nums[i] > heap.peek()) {
                 heap.replace(nums[i]);
             }
         }
         return heap.peek();
+    }
+
+    public int findKthLargestByPriorityQueue(int[] nums, int k) {
+        PriorityQueue<Integer> queue = new PriorityQueue<>((a, b) -> a - b);
+        for (int i = 0; i < k; i++) {
+            queue.offer(nums[i]);
+        }
+
+        for (int i = k; i < nums.length; i++) {
+            if (nums[i] > queue.peek()) {
+                queue.poll();
+                queue.offer(nums[i]);
+            }
+        }
+
+        return queue.peek();
     }
 
     public static void main(String[] args) {
