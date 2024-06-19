@@ -36,6 +36,9 @@ public class Leetcode198 {
 
     public int robByDp(int[] nums) {
         int length = nums.length;
+        if (length == 1) {
+            return nums[0];
+        }
         int[] dp = new int[length];  // dp[i]表示盗窃第 i 个房屋时所获得的最高金额
         dp[0] = nums[0];
         dp[1] = Math.max(nums[0],nums[1]);
