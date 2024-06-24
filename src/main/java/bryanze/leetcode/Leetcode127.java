@@ -33,7 +33,7 @@ public class Leetcode127 {
             int size = queue.size();
             for (int i = 0; i < size; i++) {
                 String currentWord = queue.poll();
-                boolean flag = dfs(wordSet, visit, queue, currentWord, endWord);
+                boolean flag = bfs(wordSet, visit, queue, currentWord, endWord);
                 if (flag) {
                     return step + 1;
                 }
@@ -43,7 +43,7 @@ public class Leetcode127 {
         return 0;
     }
 
-    private boolean dfs(HashSet<String> wordSet, HashSet<String> visit, LinkedList<String> queue,
+    private boolean bfs(HashSet<String> wordSet, HashSet<String> visit, LinkedList<String> queue,
                         String currentWord, String endWord) {
         char[] array = currentWord.toCharArray();
         for (int i = 0; i < endWord.length(); i++) {
