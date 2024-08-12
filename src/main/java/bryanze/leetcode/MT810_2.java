@@ -1,7 +1,9 @@
 package bryanze.leetcode;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * 小美有一个长度为 n 的数组 a1,a2,....,an ，他可以对数组进行如下操作：
@@ -24,63 +26,36 @@ import java.util.Scanner;
  * @date 2024/08/10
  */
 public class MT810_2 {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int T = sc.nextInt();
-        while (T-- > 0) {
-            long n = sc.nextLong();
-            long k = sc.nextLong();
-            long x = sc.nextLong();
-            long[] nums = new long[(int) n];
-            for (int i = 0; i < n; i++) {
-                nums[i] = sc.nextLong();
-            }
-            long res = dfs(nums, k, x);
-            System.out.println(res);
+    static final int N = 200000 + 10;
+    static int T, n, k, x;
+    static int[] a = new int[N];
+    static Scanner scanner = new Scanner(System.in);
+
+    public static void solve() {
+        n = scanner.nextInt();
+        k = scanner.nextInt();
+        x = scanner.nextInt();
+        for (int i = 1; i <= n; i++) {
+            a[i] = scanner.nextInt();
         }
+        long res = Long.MAX_VALUE;  // 初始化最小花费为一个极大值
+        int mex = 0;  // 表示数组a中未出现过的最小非负整数
+        Set<Integer> numsSet = new HashSet<>();  // 存储a数组的所有元素
+        for (int i = n; i >= 0; i--) {
+            while (numsSet.contains(mex)) {  // 当前while循环最多只会执行n次
+                mex++;
+            }
+            res = Math.min(res, (long) i * x + (long) mex * k);
+            numsSet.add(a[i]);
+        }
+        System.out.print(res + " ");
     }
 
-    private static long dfs(long[] nums, long k, long x) {
-        int length = nums.length;
-        long[] mex = new long[length];
+    public static void main(String[] args) {
 
-        long[] temp = new long[length];
-        System.arraycopy(nums, 0, temp, 0, length);
-        Arrays.sort(temp);
-
-        long currentMex = length;
-        for (int i = 0; i < temp.length; i++) {
-            if (temp[i] != i) {
-                currentMex = i;
-                break;
-            }
+        T = scanner.nextInt();
+        while (T-- > 0) {
+            solve();
         }
-
-        mex[0] = currentMex;
-        for (int i = 1; i < length; i++) {
-            if (nums[i - 1] < currentMex) {
-                mex[i] = nums[i - 1];
-                currentMex = nums[i - 1];
-            } else {
-                mex[i] = currentMex;
-            }
-        }
-
-        // dp[i][0] 表示删除第i个元素的累计花费
-        // dp[i][1] 表示从第i个位置删除整个数组的累计花费
-        long[][] dp = new long[length][2];
-        dp[0][0] = x;
-        dp[0][1] = k * mex[0];
-        for (int i = 1; i < length; i++) {
-            dp[i][0] = dp[i - 1][0] + x;
-            dp[i][1] = dp[i - 1][0] + k * mex[i];
-        }
-
-        long res = Long.MAX_VALUE;
-        for (long[] num : dp) {
-            res = Math.min(res, num[1]);
-        }
-
-        return Math.min(res, dp[length - 1][0]);
     }
 }
