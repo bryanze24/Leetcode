@@ -1,6 +1,8 @@
 package bryanze.leetcode;
 
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Stack;
 
 
@@ -19,17 +21,17 @@ public class Leetcode20 {
         for (int i = 0; i < s.length(); i++) {
 
             char c = s.charAt(i);
-            if(c == '('){
+            if (c == '(') {
                 stack.push(')');
-            }else if( c == '{'){
+            } else if (c == '{') {
                 stack.push('}');
             } else if (c == '[') {
                 stack.push(']');
 
-            }else {
-                if(!stack.isEmpty() && c == stack.peek()){
+            } else {
+                if (!stack.isEmpty() && c == stack.peek()) {
                     stack.pop();
-                }else{
+                } else {
                     return false;
                 }
             }
@@ -39,11 +41,37 @@ public class Leetcode20 {
         return stack.isEmpty();
     }
 
+    private final HashMap<Character, Character> map = new HashMap<>();
+
+    public boolean isValid1(String s) {
+        map.put('(',')');
+        map.put('[',']');
+        map.put('{','}');
+        map.put('?','?');
+        if (!s.isEmpty() && !map.containsKey(s.charAt(0))) {
+            return false;
+        }
+        LinkedList<Character> stack = new LinkedList<>();
+        stack.push('?');
+        for (char c : s.toCharArray()) {
+            if (map.containsKey(c)) {
+                stack.push(c);
+            } else {
+                if (c == map.get(stack.peek())) {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            }
+        }
+        return stack.size() == 1;
+    }
+
     public static void main(String[] args) {
         Leetcode20 s = new Leetcode20();
         System.out.println(s.isValid("([{}])"));
         System.out.println(s.isValid("()[]{}"));
-        System.out.println(s.isValid("()"));
+        System.out.println(s.isValid1("()"));
         System.out.println("---------------------");
 
         System.out.println(s.isValid("[)"));

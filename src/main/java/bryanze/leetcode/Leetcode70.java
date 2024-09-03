@@ -9,9 +9,10 @@ package bryanze.leetcode;
  */
 public class Leetcode70 {
     public int climbStairs(int n) {
-        int a = 1, b = 1;
-        int sum = 1;
-        for (int i = 0; i < n - 1; i++) {
+        int a = 0; //f(n - 2)
+        int b = 1; //f(n - 1)
+        int sum = 1; //f(n)
+        for (int i = 1; i <= n; i++) {
             sum = a + b;
             a = b;
             b = sum;
