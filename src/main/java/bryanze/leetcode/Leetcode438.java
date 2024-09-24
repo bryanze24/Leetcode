@@ -1,6 +1,7 @@
 package bryanze.leetcode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -60,51 +61,27 @@ public class Leetcode438 {
         return list;
     }
 
-//    public List<Integer> findAnagrams1(String s, String p) {
-//        Map<Character, Integer> need = new HashMap<>(p.length());
-//        Map<Character, Integer> windows = new HashMap<>(p.length());
-//        List<Integer> res = new ArrayList<>();
-//
-//        //初始化need
-//        for(int i = 0; i < p.length(); i++){
-//            char c = p.charAt(i);
-//            need.put(c, need.getOrDefault(c, 0) + 1);
-//        }
-//
-//        //滑动窗口的左右边界;开区间：[left, right)
-//        int left = 0, right = 0;
-//        int valid = 0;//windows 中满足need 的字符的个数。
-//
-//        while(right < s.length()){
-//            char c =  s.charAt(right);//将要加入到windows中的字符
-//            right++;
-//
-//            if(need.containsKey(c)){
-//                windows.put(c, windows.getOrDefault(c, 0) + 1);
-//                if(need.get(c).equals(windows.get(c))){
-//                    valid++;
-//                }
-//            }
-//
-//            //缩小滑动窗口
-//            while(right - left >= p.length()){
-//                if(valid == need.size()) res.add(left);
-//
-//                char d = s.charAt(left);//要移除的字符
-//                left++;
-//
-//                if(need.containsKey(d)){
-//                    if(need.get(d).equals(windows.get(d))){
-//                        valid--;
-//                    }
-//                    windows.put(d, windows.get(d) - 1);
-//                }
-//            }
-//        }
-//
-//        return res;
-//
-//    }
+    public List<Integer> findAnagrams1(String s, String p) {
+        List<Integer> ans = new ArrayList<>();
+        if (s.length() < p.length()) {
+            return ans;
+        }
+        char[] charArray = p.toCharArray();
+        Arrays.sort(charArray);
+        p = new String(charArray);
+        for (int i = 0; i <= s.length() - p.length(); i++) {
+            int j = i + p.length();
+            String subString = s.substring(i, j);
+            char[] temp = subString.toCharArray();
+            Arrays.sort(temp);
+            String t = new String(temp);
+            if (t.equals(p)) {
+                ans.add(i);
+            }
+        }
+
+        return ans;
+    }
 
     public static void main(String[] args) {
         String s = "abab";

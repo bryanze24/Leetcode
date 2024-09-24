@@ -24,7 +24,7 @@ public class Leetcode3 {
 
             macLength = Math.max(macLength, end - begin + 1);
         }
-        return 0;
+        return macLength;
     }
 
     public int lengthOfLongestSubstring1(String s) {

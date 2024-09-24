@@ -1,6 +1,7 @@
 package bryanze.leetcode;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 /**
@@ -12,6 +13,31 @@ import java.util.PriorityQueue;
  * @date 2024/04/09
  */
 public class Leetcode239 {
+
+    public int[] maxSlidingWindow1(int[] nums, int k) {
+        LinkedList<Integer> queue = new LinkedList<>();
+        int[] ans = new int[nums.length - k + 1];
+        for (int i = 0; i < nums.length; i++) {
+            //保证队列是从大到小排列
+            while(!queue.isEmpty() && nums[queue.peek()] <= nums[i]) {
+                queue.pollLast();
+            }
+            //入队
+            queue.addLast(i);
+            //出队
+            if (i - queue.peek() >= k) {
+                queue.poll();
+            }
+            //记录答案
+            if (i + 1 >= k) {
+                //因为队列是从到小排列，所以最大值就是就是队首
+                ans[i + 1 - k] = nums[queue.peek()];
+            }
+        }
+
+        return ans;
+    }
+
     public int[] maxSlidingWindow(int[] nums, int k) {
 
         PriorityQueue<int[]> queue = new PriorityQueue<>(
